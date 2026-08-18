@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
+<rect width="800" height="1000" fill="#f7f6f2"/>
+<path d="M235 190 L330 125 L400 175 L470 125 L565 190 L650 335 L555 385 L530 315 L530 840 L270 840 L270 315 L245 385 L150 335 Z" fill="#e8e5dc"/>
+<path d="M330 125 L400 175 L470 125 L445 235 L400 275 L355 235 Z" fill="#d6d2c8"/>
+<path d="M270 315 L530 315" stroke="#c1bdb3" stroke-width="5"/>
+<text x="400" y="920" text-anchor="middle" font-family="Arial" font-size="28" letter-spacing="8" fill="#111">ZEVARO SHOP</text>
+</svg>

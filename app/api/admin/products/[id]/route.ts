@@ -1,0 +1,7 @@
+import { NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+import { createSupabaseServerClient } from '@/lib/supabase/server';
+async function ok(){const s=await createSupabaseServerClient();const {data:{user}}=await s.auth.getUser();if(!user)return false;const {data:a}=await s.from('admins').select('id').eq('id',user.id).maybeSingle();return !!a}
+function db(){return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!,process.env.SUPABASE_SERVICE_ROLE_KEY!,{auth:{autoRefreshToken:false,persistSession:false}})}
+export async function PATCH(req:Request,{params}:{params:Promise<{id:string}>}){if(!await ok())return NextResponse.json({error:'Forbidden'},{status:403});const {id}=await params;const body=await req.json();const allowed=['sku','slug','name','description','price','sale_price','fabric','fit','pattern','colors','sizes','stock','badge','featured','active'];const patch:any={};for(const k of allowed)if(body[k]!==undefined)patch[k]=body[k];const {data,error}=await db().from('products').update(patch).eq('id',id).select().single();if(error)return NextResponse.json({error:error.message},{status:400});return NextResponse.json({product:data})}
+export async function DELETE(_:Request,{params}:{params:Promise<{id:string}>}){if(!await ok())return NextResponse.json({error:'Forbidden'},{status:403});const {id}=await params;const {error}=await db().from('products').update({active:false}).eq('id',id);if(error)return NextResponse.json({error:error.message},{status:400});return NextResponse.json({ok:true})}

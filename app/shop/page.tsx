@@ -1,0 +1,2 @@
+import {getCatalog} from '@/lib/catalog';import {ShopClient} from '@/components/shop-client';
+export default async function ShopPage({searchParams}:{searchParams:Promise<{q?:string;sort?:string}>}){const params=await searchParams;const catalog=await getCatalog();return <main className="container-z py-8 md:py-12"><ShopClient catalog={catalog} initialQuery={params.q||''} initialSort={params.sort||'featured'}/></main>}
